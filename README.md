@@ -16,8 +16,7 @@ Este proyecto implementa una **API REST desarrollada con Node.js y Express**, qu
 
 1. **Clonar el repositorio**
    ```bash
-   git clone https://github.com/tuusuario/proyecto-api.git
-
+   git clone https://github.com/bcoriasco2025/Entrega1_BackendI
    cd mi-api
 
 2. **Instalar dependencias**
