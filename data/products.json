@@ -1,18 +1,5 @@
 [
   {
-    "title": "Detergente Líquido Limón",
-    "description": "Detergente concentrado con aroma a limón para lavar vajilla y utensilios de cocina.",
-    "code": "DL001",
-    "price": 980,
-    "status": true,
-    "stock": 100,
-    "category": "Cocina",
-    "thumbnails": [
-      "https://example.com/img/detergente-limon.jpg"
-    ],
-    "id": "DL001-1"
-  },
-  {
     "title": "Lavandina Concentrada",
     "description": "Lavandina ideal para desinfectar pisos y superficies del hogar.",
     "code": "LV002",
@@ -21,7 +8,7 @@
     "stock": 80,
     "category": "Hogar",
     "thumbnails": [
-      "https://example.com/img/lavandina.jpg"
+      "https://placehold.co/600x400"
     ],
     "id": "LV002-2"
   },
@@ -34,7 +21,7 @@
     "stock": 100,
     "category": "Hogar",
     "thumbnails": [
-      "https://example.com/img/limpiador-multiuso.jpg"
+      "https://placehold.co/600x400"
     ],
     "id": "LM003-3"
   },
@@ -47,7 +34,7 @@
     "stock": 75,
     "category": "Hogar",
     "thumbnails": [
-      "https://example.com/img/desinfectante-spray.jpg"
+      "https://placehold.co/600x400"
     ],
     "id": "DS004-4"
   },
@@ -60,7 +47,7 @@
     "stock": 90,
     "category": "Ropa",
     "thumbnails": [
-      "https://example.com/img/jabon-polvo.jpg"
+      "https://placehold.co/600x400"
     ],
     "id": "JP005-5"
   },
@@ -73,7 +60,7 @@
     "stock": 85,
     "category": "Ropa",
     "thumbnails": [
-      "https://example.com/img/suavizante.jpg"
+      "https://placehold.co/600x400"
     ],
     "id": "SR006-6"
   },
@@ -86,7 +73,7 @@
     "stock": 60,
     "category": "Hogar",
     "thumbnails": [
-      "https://example.com/img/limpiador-vidrios.jpg"
+      "https://placehold.co/600x400"
     ],
     "id": "LV007-7"
   },
@@ -99,7 +86,7 @@
     "stock": 50,
     "category": "Limpieza",
     "thumbnails": [
-      "https://example.com/img/escoba-recogedor.jpg"
+      "https://placehold.co/600x400"
     ],
     "id": "ER008-8"
   },
@@ -112,7 +99,7 @@
     "stock": 200,
     "category": "Accesorios",
     "thumbnails": [
-      "https://example.com/img/guantes.jpg"
+      "https://placehold.co/600x400"
     ],
     "id": "GL009-9"
   },
@@ -125,34 +112,8 @@
     "stock": 100,
     "category": "Limpieza",
     "thumbnails": [
-      "https://example.com/img/trapo-microfibra.jpg"
+      "https://placehold.co/600x400"
     ],
     "id": "TM010-10"
-  },
-  {
-    "title": "Limpiador de Baños Eficaz",
-    "description": "Limpiador líquido con fórmula potente para eliminar sarro, manchas y gérmenes del baño.",
-    "code": "LB011",
-    "price": 780,
-    "status": true,
-    "stock": 90,
-    "category": "Baño",
-    "thumbnails": [
-      "https://example.com/img/limpiador-banos.jpg"
-    ],
-    "id": "LB011"
-  },
-  {
-    "title": "Jabon fragancia Floral",
-    "description": "Jabón de cuerpo con fragancia Floral para dejar un aroma con sensación floral",
-    "code": "J9999",
-    "price": 700,
-    "status": true,
-    "stock": 30,
-    "category": "Limpieza",
-    "thumbnails": [
-      "https://example.com/img/jabonfloral.jpg"
-    ],
-    "id": "J9999"
   }
 ]
