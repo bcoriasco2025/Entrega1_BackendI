@@ -1,16 +1,9 @@
-# Proyecto: API de Productos de Limpieza y Carrito de Compras
+# Entrega n°2 - Websockets
 
 ## Descripción General
 
-Este proyecto implementa una **API REST desarrollada con Node.js y Express**, que permite **gestionar productos y carritos de compra**.  
+Este proyecto implementa una **Agregar un sistema visual con Handlebars y actualización en tiempo real usando WebSockets (Socket.IO).** 
 
-
-## Tecnologías Utilizadas
-
-- **Node.js** – entorno de ejecución JavaScript del lado del servidor  
-- **Express.js** – framework para la creación de APIs REST  
-- **File System (fs/promises)** – para la persistencia de datos en archivos `.json`  
-- **Nodemon** (en desarrollo) – para ejecutar el servidor con recarga automática  
 
 ## Instalación y Ejecución
 
@@ -27,35 +20,25 @@ Este proyecto implementa una **API REST desarrollada con Node.js y Express**, qu
 
     http://localhost:8080
 
-## Endpoints Principales
+4. **Endpoints Disponibles**
 
-**Productos (/api/products)**
+*Vistas*
 
-| Método     | Endpoint             | Descripción                      |
-| ---------- | -------------------- | -------------------------------- |
-| **GET**    | `/api/products`      | Listar todos los productos       |
-| **GET**    | `/api/products/:pid` | Obtener un producto por su ID    |
-| **POST**   | `/api/products`      | Crear un nuevo producto          |
-| **PUT**    | `/api/products/:pid` | Actualizar un producto existente |
-| **DELETE** | `/api/products/:pid` | Eliminar un producto existente   |
-
----
-
-**Carritos (/api/carts)**
-
-| Método     | Endpoint                      | Descripción                      |
-| ---------- | ----------------------------  | -------------------------------- |
-| **POST**   | `/api/carts`                  | Crear un nuevo carrito vacío     |
-| **GET**    | `/api/carts/:cid`             | Obtener los productos de carrito |
-| **POST**   | `/api/carts/:cid/product/:pid`| Agregar un producto al carrito   |
-
----
+| Método | Ruta              | Descripción                          |
+| ------ | ----------------- | ------------------------------------ |
+| GET    | /                 | Muestra la lista de productos (home) |
+| GET    | /realtimeproducts | Muestra los productos en tiempo real |
 
 
+5. **Productos (HTTP)**
+
+| Método | Ruta          | Descripción                |
+| ------ | ------------- | -------------------------- |
+| GET    | /products     | Lista todos los productos  |
+| POST   | /products     | Crea un nuevo producto     |
+| DELETE | /products/:id | Elimina un producto por ID |
 
 
+6. **Consideraciones Generales**
 
-
-
-
-# Entrega2-Backend1
+En la vista realTimeProducts, **la creación y eliminación de productos puede realizarse mediante un formulario que utiliza WebSockets.** Cada cambio se refleja automáticamente en la lista sin necesidad de recargar la página.
