@@ -1,55 +1,98 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Tienda - Productos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="d-flex flex-column min-vh-100">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">Mi Tienda</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+<form method="GET" class="row mb-4">
+  <div class="col-md-3">
+    <input
+      type="text"
+      name="category"
+      class="form-control"
+      placeholder="Categoría"
+      value="{{query.category}}"
+    >
+  </div>
+
+  <div class="col-md-3">
+    <select name="sort" class="form-control">
+      <option value="">Ordenar por precio</option>
+      <option value="asc" {{#if (eq query.sort "asc")}}selected{{/if}}>Menor precio</option>
+      <option value="desc" {{#if (eq query.sort "desc")}}selected{{/if}}>Mayor precio</option>
+    </select>
+  </div>
+
+  <div class="col-md-2">
+    <select name="limit" class="form-control">
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="20">20</option>
+    </select>
+  </div>
+
+  <div class="col-md-2">
+    <button class="btn btn-primary w-100">Filtrar</button>
+  </div>
+</form>
+
+<div class="container mt-4 flex-grow-1">
+  <h1 class="mb-4 text-center">Todos los Productos</h1>
+
+  <div class="row">
+    {{#each products}}
+      <div class="col-md-4 mb-3">
+        <div class="card h-100">
+          <img src="{{thumbnails.[0]}}" class="card-img-top" alt="{{title}}">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{title}}</h5>
+            <p>{{description}}</p>
+            <p><strong>$ {{price}}</strong></p>
+            <p>Stock: {{stock}}</p>
+            <button
+              type="button"
+              class="btn btn-success btn-sm mt-2"
+              onclick="addToCart('{{_id}}')">
+                Agregar al Carrito
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Productos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/realtimeproducts">Productos en Tiempo Real</a>
-                    </li>
-                </ul>
-            </div>
+
+          </div>
         </div>
-    </nav>
-    <div class="container mt-4 flex-grow-1">
+      </div>
+    {{/each}}
+  </div>
+</div>
 
-        <h1 class="mb-4 text-center">Todos los Productos</h1>
+<nav class="d-flex justify-content-center mt-4">
+  <ul class="pagination">
 
-        <div class="row justify-content-center">
-            {{#each products}}
-            <div class="col-md-4 mb-3">
-                <div class="card h-100 text-center">
-                    <img src="{{this.thumbnails.[0]}}" class="card-img-top" alt="{{this.title}}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{this.title}}</h5>
-                        <p class="card-text">{{this.description}}</p>
-                        <p class="card-text"><strong>Precio:</strong> ${{this.price}}</p>
-                    </div>
-                </div>
-            </div>
-            {{/each}}
-        </div>
-    </div>
+    {{#if pagination.hasPrevPage}}
+      <li class="page-item">
+        <a
+          class="page-link"
+          href="/?page={{pagination.prevPage}}&limit={{query.limit}}&category={{query.category}}&sort={{query.sort}}"
+        >
+          Anterior
+        </a>
+      </li>
+    {{/if}}
 
-    <footer class="bg-dark text-white text-center py-3 mt-auto">
-        <p class="mb-0">&copy; 2025 Mi Tienda. Todos los derechos reservados.</p>
-    </footer>
+    <li class="page-item active">
+      <span class="page-link">
+        Página {{pagination.page}} de {{pagination.totalPages}}
+      </span>
+    </li>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+    {{#if pagination.hasNextPage}}
+      <li class="page-item">
+        <a
+          class="page-link"
+          href="/?page={{pagination.nextPage}}&limit={{query.limit}}&category={{query.category}}&sort={{query.sort}}"
+        >
+          Siguiente
+        </a>
+      </li>
+    {{/if}}
+
+  </ul>
+</nav>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  const cartId = "{{cartId}}";
+</script>
+<script src="/js/cart.js"></script>

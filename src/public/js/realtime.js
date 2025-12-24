@@ -1,66 +1,72 @@
-const socket = io();
+document.addEventListener('DOMContentLoaded', () => {
+  const socket = io();
 
-document.getElementById("productForm").addEventListener("submit", (e) => {
+  const form = document.getElementById('productForm');
+  const list = document.getElementById('realTimeList');
+
+  if (!form || !list) return;
+
+  // AGREGAR PRODUCTO
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const newProduct = {
-        title: document.getElementById("title").value,
-        description: document.getElementById("description").value,
-        code: document.getElementById("code").value,
-        price: Number(document.getElementById("price").value),
-        stock: Number(document.getElementById("stock").value),
-        status: document.getElementById("status").value === 'true',
-        category: document.getElementById("category").value,
-        thumbnails: [document.getElementById("thumbnail").value]
+      title: document.getElementById('title').value,
+      description: document.getElementById('description').value,
+      code: document.getElementById('code').value,
+      category: document.getElementById('category').value,
+      price: Number(document.getElementById('price').value),
+      stock: Number(document.getElementById('stock').value),
+      status: true,
+      thumbnails: [document.getElementById('thumbnail').value || '']
     };
 
-    socket.emit("newProduct", newProduct);
-    e.target.reset();
-});
+    socket.emit('newProduct', newProduct);
+    form.reset();
+  });
 
-socket.on('updateProducts', (products) => {
-    const list = document.getElementById('realTimeList');
+  
+  // ACTUALIZAR LISTA
+  socket.on('updateProducts', (products) => {
     list.innerHTML = '';
 
     products.forEach(p => {
-        const cardCol = document.createElement('div');
-        cardCol.className = 'col-md-4 mb-3';
+      const col = document.createElement('div');
+      col.className = 'col-md-4 mb-3';
 
-        cardCol.innerHTML = `
-            <div class="card h-100 text-center">
-                <img src="${p.thumbnails[0] || ''}" class="card-img-top" alt="${p.title}">
-                <div class="card-body">
-                    <h5 class="card-title">${p.title}</h5>
-                    <p class="card-text">${p.description || ''}</p>
-                    <p class="card-text"><strong>Precio:</strong> $${p.price}</p>
-                    <button class="btn btn-danger btn-sm mt-2" onclick="deleteProduct('${p.id}')">Eliminar</button>
-                </div>
-            </div>
-        `;
+      col.innerHTML = `
+        <div class="card h-100">
+          <img src="${p.thumbnails?.[0] || ''}" class="card-img-top">
+          <div class="card-body text-center">
+            <h5>${p.title}</h5>
+            <p>${p.description || ''}</p>
+            <p><strong>$ ${p.price}</strong></p>
+            <button class="btn btn-danger btn-sm" onclick="deleteProduct('${p._id}')">
+              Eliminar
+            </button>
+          </div>
+        </div>
+      `;
 
-        list.appendChild(cardCol);
+      list.appendChild(col);
     });
-});
+  });
 
-function deleteProduct(productId) {
+
+  // ELIMINAR PRODUCTO
+  window.deleteProduct = (productId) => {
     Swal.fire({
-        title: '¿Está seguro que desea eliminarlo?',
-        text: "Esta acción no se puede deshacer.",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Sí, eliminar',
-        cancelButtonText: 'Cancelar'
+      title: '¿Eliminar producto?',
+      text: 'Esta acción no se puede deshacer',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
     }).then((result) => {
-        if (result.isConfirmed) {
-            socket.emit('deleteProduct', productId);
-
-            Swal.fire(
-                'Eliminado',
-                'El producto ha sido eliminado.',
-                'success'
-            );
-        }
+      if (result.isConfirmed) {
+        socket.emit('deleteProduct', productId);
+      }
     });
-}
+  };
+});
